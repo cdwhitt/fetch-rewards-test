@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import "./App.css"
+const App = () => {
+	const [list, setList] = useState([])
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	useEffect(() => {
+		const callApiAndSetData = async () => {
+			const { data } = await axios.get("/api/fetch-rewards-data")
+
+			setList(data)
+		}
+
+		callApiAndSetData()
+	}, [])
+
+	const listNodes = list.map((listItem) => {
+		return <li key={listItem.id}>{listItem.name}</li>
+	})
+
+	return (
+		<div className="App">
+			<ul>{listNodes}</ul>
+		</div>
+	)
 }
 
-export default App;
+export default App
