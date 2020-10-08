@@ -24,7 +24,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"client": "yarn start",
-		"server": "nodemon server.js",
+		"server": "nodemon server",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
 	},
 	"eslintConfig": {
